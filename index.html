@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Spa</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/es.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Gestión de Spa</h1>
+  </header>
+
+  <main>
+    <div class="button-container">
+      <button id="newTurnBtn">Nuevo Turno</button>
+      <button id="addServiceBtn">Agregar Servicio</button>
+      <button id="addProfessionalBtn">Agregar Profesional</button>
+    </div>
+
+    <section id="assignedTurnsSection">
+      <h2>Turnos Asignados</h2>
+      <div id="calendar"></div>
+    </section>
+  </main>
+
+  <!-- Modal para agregar turnos -->
+  <div id="turnModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Nuevo Turno</h2>
+      <form id="turnForm">
+        <div>
+          <label for="turnService">Servicio</label>
+          <select id="turnService" required>
+            <option value="Corte de Cabello">Corte de Cabello</option>
+            <option value="Manicura">Manicura</option>
+            <option value="Pedicura">Pedicura</option>
+          </select>
+        </div>
+        <div>
+          <label for="turnProfessional">Profesional</label>
+          <select id="turnProfessional" required>
+            <option value="Ana">Ana</option>
+            <option value="Carlos">Carlos</option>
+          </select>
+        </div>
+        <div>
+          <label for="turnDate">Fecha</label>
+          <input type="date" id="turnDate" required>
+        </div>
+        <div>
+          <label for="turnTime">Hora</label>
+          <input type="time" id="turnTime" required>
+        </div>
+        <button type="submit">Guardar Turno</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para agregar servicios -->
+  <div id="serviceModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Agregar Servicio</h2>
+      <form id="serviceForm">
+        <div>
+          <label for="serviceName">Nombre del Servicio</label>
+          <input type="text" id="serviceName" required>
+        </div>
+        <button type="submit">Guardar Servicio</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para agregar profesionales -->
+  <div id="professionalModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;"></span>
+      <h2>Agregar Profesional</h2>
+      <form id="professionalForm">
+        <div>
+          <label for="professionalName">Nombre</label>
+          <input type="text" id="professionalName" required>
+        </div>
+        <div>
+          <label for="professionalPhone">Teléfono</label>
+          <input type="text" id="professionalPhone" required>
+        </div>
+        <div>
+          <label for="professionalProfession">Profesión</label>
+          <input type="text" id="professionalProfession" required>
+        </div>
+        <button type="submit">Guardar Profesional</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
