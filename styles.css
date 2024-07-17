@@ -26,6 +26,10 @@
     overflow-y: auto;
 }
 
+h2 {
+    color: #545454;
+}
+
 #serviceModal {
     z-index: 9999; /* Asegúrate de que este valor sea mayor que el del modal de profesionales */
 }
