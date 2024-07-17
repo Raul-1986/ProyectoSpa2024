@@ -1,106 +1,137 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Spa</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/es.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Spa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Gestión de Spa</h1>
-  </header>
-
-  <main>
-    <div class="button-container">
-      <button id="newTurnBtn">Nuevo Turno</button>
-      <button id="addServiceBtn">Agregar Servicio</button>
-      <button id="addProfessionalBtn">Agregar Profesional</button>
+    <div class="container">
+        <div class="header mt-5 text-center">
+            <h1>Gestión de Spa</h1>
+            <div class="mb-3">
+                <button id="newTurnBtn" class="btn mx-2">Nuevo Turno</button>
+                <button id="addServiceBtn" class="btn mx-2">Agregar Servicio</button>
+                <button id="addProfessionalBtn" class="btn mx-2">Agregar Profesional</button>
+            </div>
+        </div>
+        <h2 class="mt-5">Turnos Asignados</h2>
+        <div id="calendar" class="mt-3"></div>
     </div>
 
-    <section id="assignedTurnsSection">
-      <h2>Turnos Asignados</h2>
-      <div id="calendar"></div>
-    </section>
-  </main>
-
-  <!-- Modal para agregar turnos -->
-  <div id="turnModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Nuevo Turno</h2>
-      <form id="turnForm">
-        <div>
-          <label for="turnService">Servicio</label>
-          <select id="turnService" required>
-            <option value="Corte de Cabello">Corte de Cabello</option>
-            <option value="Manicura">Manicura</option>
-            <option value="Pedicura">Pedicura</option>
-          </select>
+    <!-- Modal para agregar turno -->
+    <div class="modal" id="turnModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nuevo Turno</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="turnForm">
+                        <div class="form-group">
+                            <label for="turnService">Servicio</label>
+                            <select id="turnService" class="form-control" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="turnProfessional">Profesional</label>
+                            <select id="turnProfessional" class="form-control" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="turnDate">Fecha</label>
+                            <input type="date" id="turnDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="turnTime">Hora</label>
+                            <input type="time" id="turnTime" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div>
-          <label for="turnProfessional">Profesional</label>
-          <select id="turnProfessional" required>
-            <option value="Ana">Ana</option>
-            <option value="Carlos">Carlos</option>
-          </select>
-        </div>
-        <div>
-          <label for="turnDate">Fecha</label>
-          <input type="date" id="turnDate" required>
-        </div>
-        <div>
-          <label for="turnTime">Hora</label>
-          <input type="time" id="turnTime" required>
-        </div>
-        <button type="submit">Guardar Turno</button>
-      </form>
     </div>
-  </div>
 
-  <!-- Modal para agregar servicios -->
-  <div id="serviceModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Agregar Servicio</h2>
-      <form id="serviceForm">
-        <div>
-          <label for="serviceName">Nombre del Servicio</label>
-          <input type="text" id="serviceName" required>
+    <!-- Modal para agregar servicio -->
+    <div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="AgregarServicioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar Servicio</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="serviceForm">
+                        <div class="form-group">
+                            <label for="serviceName">Nombre del Servicio</label>
+                            <input type="text" id="serviceName" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <button type="submit">Guardar Servicio</button>
-      </form>
     </div>
-  </div>
 
-  <!-- Modal para agregar profesionales -->
-  <div id="professionalModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;"></span>
-      <h2>Agregar Profesional</h2>
-      <form id="professionalForm">
-        <div>
-          <label for="professionalName">Nombre</label>
-          <input type="text" id="professionalName" required>
+    <!-- Modal para agregar profesional -->
+    <div class="modal fade" id="professionalModal" tabindex="-1" aria-labelledby="AgregarProfesionalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar Profesional</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="professionalForm">
+                        <div class="form-group">
+                            <label for="professionalName">Nombre</label>
+                            <input type="text" id="professionalName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="professionalPhone">Teléfono</label>
+                            <input type="text" id="professionalPhone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="professionalProfession">Profesión</label>
+                            <input type="text" id="professionalProfession" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="professionalServices">Servicios 
+                                <button type="button" id="addServiceInProfessionalModalBtn" class="btn btn-link p-0 ml-2">Agregar Servicio</button>
+                            </label>
+                            <select id="professionalServices" class="form-control" multiple required></select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                    <h3 class="mt-4">Profesionales Existentes</h3>
+                    <table id="professionalTable" class="display table table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Teléfono</th>
+                                <th>Profesión</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Datos de profesionales -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div>
-          <label for="professionalPhone">Teléfono</label>
-          <input type="text" id="professionalPhone" required>
-        </div>
-        <div>
-          <label for="professionalProfession">Profesión</label>
-          <input type="text" id="professionalProfession" required>
-        </div>
-        <button type="submit">Guardar Profesional</button>
-      </form>
     </div>
-  </div>
 
-  <script src="app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/es.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
